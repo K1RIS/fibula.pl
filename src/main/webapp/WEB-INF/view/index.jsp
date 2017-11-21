@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<a href="http://localhost:8080/account/register">register</a>
+	<a href="http://localhost:8080/account/createcharacter">create character</a>
 </body>
 </html>
