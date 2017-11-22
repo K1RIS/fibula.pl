@@ -6,6 +6,4 @@ import pl.fibula.entity.Profession;
 
 public interface ProfessionRepository extends JpaRepository<Profession, Long> {
 	
-	Profession findById(Long id);
-	
 }

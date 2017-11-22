@@ -22,8 +22,8 @@ public class User {
 	private Long id;
 	
 	@NotBlank
-	@Column(nullable = false)
-	private String login;
+	@Column(nullable = false, unique = true)
+	private String name;
 
 	@NotBlank
 	@Column(nullable = false)
@@ -45,12 +45,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getName() {
+		return name;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPassword() {
@@ -79,7 +79,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", login=" + login + ", password=" + password + ", email=" + email + ", heroes="
+		return "User [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", heroes="
 				+ heroes + "]";
 	}
 

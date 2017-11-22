@@ -10,7 +10,7 @@
 <body>
 	<f:form method="post" modelAttribute="user">
 		<f:errors path="*" />
-		login<f:input path="login" /> 
+		login<f:input path="name" /> 
 		haslo<f:input path="password" />
 		email<f:input path="email"/>
 		<input type="submit" />

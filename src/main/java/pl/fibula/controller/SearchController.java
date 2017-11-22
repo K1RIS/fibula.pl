@@ -3,10 +3,8 @@ package pl.fibula.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import pl.fibula.entity.Hero;
 import pl.fibula.repository.HeroRepository;
@@ -16,16 +14,19 @@ public class SearchController {
 
 	@Autowired
 	private HeroRepository heroRepository;
-	
-	@GetMapping(path = "statistics/search")
+
+	@RequestMapping("search")
 	public String home() {
 		return "statistics/search";
 	}
-	
-	@ResponseBody
-	@RequestMapping(method = RequestMethod.POST, value = "statistics/search")
-	public String search(String name) {
-		return name;
+
+	@RequestMapping("character")
+	String search(@RequestParam String name, Model model) {
+		Hero hero = heroRepository.findByName(name);
+		if(hero == null) {
+			return "redirect:search";
+		}
+		model.addAttribute(hero);
+		return "character";
 	}
-	
 }

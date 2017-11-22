@@ -19,6 +19,7 @@ import pl.fibula.entity.Hero;
 import pl.fibula.repository.GenderRepository;
 import pl.fibula.repository.HeroRepository;
 import pl.fibula.repository.ProfessionRepository;
+import pl.fibula.repository.UserRepository;
 
 @Controller
 public class HeroController {
@@ -31,8 +32,11 @@ public class HeroController {
 
 	@Autowired
 	private ProfessionRepository professionRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 
-	@GetMapping(path = "account/createcharacter")
+	@GetMapping("account/createcharacter")
 	public String home(Model model) {
 		model.addAttribute("hero", new Hero());
 		return "account/createcharacter";
@@ -44,7 +48,8 @@ public class HeroController {
 		if (bresult.hasErrors()) {
 			return bresult.toString();
 		} else {
-			hero.setProfession(professionRepository.findById(1l));
+			hero.setProfession(professionRepository.findOne(1l));
+			hero.setUser(userRepository.findOne(1l));
 			heroRepository.save(hero);
 			return "dodano";
 		}
@@ -54,5 +59,5 @@ public class HeroController {
 	public List<Gender> findAllGenders() {
 		return genderRepository.findAll();
 	}
-
+	
 }
