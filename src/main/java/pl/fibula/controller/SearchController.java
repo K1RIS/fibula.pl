@@ -17,7 +17,7 @@ public class SearchController {
 
 	@RequestMapping("search")
 	public String home() {
-		return "statistics/search";
+		return "search";
 	}
 
 	@RequestMapping("character")

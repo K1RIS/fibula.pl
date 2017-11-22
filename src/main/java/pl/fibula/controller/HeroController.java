@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -58,6 +59,25 @@ public class HeroController {
 	@ModelAttribute("genders")
 	public List<Gender> findAllGenders() {
 		return genderRepository.findAll();
+	}
+	
+	@RequestMapping("account/character/edit/{name}")
+	String edit(@PathVariable String name, Model model) {
+		Hero hero = heroRepository.findByName(name);
+		model.addAttribute(hero);
+		return "account/edit";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "account/character/edit/{name}")
+	public String edit2(@Valid Hero hero) {
+		heroRepository.save(hero);
+		return "redirect:/account";
+	}
+	
+	@RequestMapping("account/character/delete/{name}")
+	String delete(@PathVariable String name, Model model) {
+		heroRepository.delete(heroRepository.findByName(name));
+		return "redirect:/account";
 	}
 	
 }

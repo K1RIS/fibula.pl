@@ -57,7 +57,7 @@ public class UserController {
 			if (newPassword.equals(newPassword2)) {
 				user.setPassword(newPassword);
 				userRepository.save(user);
-				return "account/managment";
+				return "redirect:";
 			}
 		}
 		return "account/changepassword";
@@ -73,7 +73,7 @@ public class UserController {
 		User user = userRepository.findOne(1l);
 		user.setEmail(email);
 		userRepository.save(user);
-		return "account/changeemail";
+		return "redirect:";
 	}
 
 }
