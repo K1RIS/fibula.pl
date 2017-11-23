@@ -15,6 +15,7 @@
 	<table>
 		<tr>
 			<th>name</th>
+			<th>profession</th>
 			<th>level</th>
 			<th>sword fighting</th>
 			<th>axe fighting</th>
@@ -27,6 +28,11 @@
 			<td>
 				<%
 					out.print(heroes.get(i).getName());
+				%>
+			</td>
+			<td>
+				<%
+					out.print(heroes.get(i).getProfession());
 				%>
 			</td>
 			<td>

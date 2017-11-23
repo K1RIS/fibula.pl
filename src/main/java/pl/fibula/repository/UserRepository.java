@@ -6,4 +6,6 @@ import pl.fibula.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+	User findByName(String name);
+	
 }

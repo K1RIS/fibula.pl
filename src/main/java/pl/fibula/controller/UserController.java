@@ -1,5 +1,6 @@
 package pl.fibula.controller;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,22 +27,55 @@ public class UserController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "account/register")
-	public String register(@Valid User user, BindingResult bresult) {
+	public String register(@Valid User user, BindingResult bresult, HttpSession ses) {
 		if (bresult.hasErrors()) {
 			return "account/register";
 		} else {
 			userRepository.save(user);
-			return "account/managment";
+			ses.setAttribute("userName",user.getName());
+			return "redirect:/account";
 		}
 	}
 
-	@RequestMapping("account")
-	public String homepage(Model model) {
-		User user = userRepository.findOne(1l);
-		model.addAttribute("user", user);
-		return "account/managment";
+	@RequestMapping("account/login")
+	public String xzczxc(Model model) {
+		return "account/login";
 	}
 
+	@RequestMapping(method = RequestMethod.POST, value = "account/login")
+	public String xcz(@RequestParam String name, @RequestParam String password, HttpSession ses) {
+		User user = userRepository.findByName(name);
+		if (user != null) {
+			if (user.getPassword().equals(password)) {
+				ses.setAttribute("userName", user.getName());
+				return "redirect:";
+			} else {
+				return "redirect:login";
+			}
+		}
+		return "redirect:login";
+	}
+
+	@RequestMapping("account")
+	public String homepage(Model model, HttpSession ses) {
+		if (ses.getAttribute("userName") != null) {
+			String userName = (String) ses.getAttribute("userName");
+			User user = userRepository.findByName(userName);
+			model.addAttribute("user", user);
+			return "account/managment";
+		} else {
+			return "redirect:account/login";
+		}
+	}
+
+	@RequestMapping("account/logout")
+	public String logout(Model mode, HttpSession ses) {
+		if (ses.getAttribute("userName") != null) {
+			ses.invalidate();
+		}
+		return "redirect:/";
+	}
+	
 	@RequestMapping("account/changepassword")
 	public String changePassword(Model model) {
 		return "account/changepassword";

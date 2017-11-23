@@ -23,6 +23,7 @@
 	<a href="http://localhost:8080/account/changepassword">change password</a>
 	<a href="http://localhost:8080/account/changeemail">change email</a>
 	<a href="http://localhost:8080/account/createcharacter">create character</a>
+	<%if(!user.getHeroes().isEmpty()){ %>
 	<table>
 		<tr>
 			<th>nazwa</th>
@@ -44,5 +45,7 @@
 			}
 		%>
 	</table>
+	<%} %>
+	<a href="http://localhost:8080/account/logout">logout</a>
 </body>
 </html>
