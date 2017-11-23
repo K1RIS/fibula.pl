@@ -53,7 +53,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<!-- Need this to compile JSP -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>

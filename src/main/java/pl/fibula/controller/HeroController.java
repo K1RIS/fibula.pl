@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.fibula.entity.Gender;
 import pl.fibula.entity.Hero;
@@ -43,16 +42,15 @@ public class HeroController {
 		return "account/createcharacter";
 	}
 
-	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST, value = "account/createcharacter")
 	public String create(@Valid Hero hero, BindingResult bresult) {
 		if (bresult.hasErrors()) {
-			return bresult.toString();
+			return "account/createcharacter";
 		} else {
 			hero.setProfession(professionRepository.findOne(1l));
 			hero.setUser(userRepository.findOne(1l));
 			heroRepository.save(hero);
-			return "dodano";
+			return "redirect:/account";
 		}
 	}
 

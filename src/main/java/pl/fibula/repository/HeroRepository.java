@@ -7,5 +7,5 @@ import pl.fibula.entity.Hero;
 public interface HeroRepository extends JpaRepository<Hero, Long> {
 	
 	Hero findByName(String name);
-	
+		  
 }

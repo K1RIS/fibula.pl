@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.fibula.entity.User;
 import pl.fibula.repository.UserRepository;
@@ -26,14 +25,13 @@ public class UserController {
 		return "account/register";
 	}
 
-	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST, value = "account/register")
 	public String register(@Valid User user, BindingResult bresult) {
 		if (bresult.hasErrors()) {
-			return "error";
+			return "account/register";
 		} else {
 			userRepository.save(user);
-			return "dodano";
+			return "account/managment";
 		}
 	}
 
