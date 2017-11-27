@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page = "../header.jsp" />
 	<%
 		User user = (User) request.getAttribute("user");
 		List<Hero> heroes = user.getHeroes();
@@ -17,7 +18,7 @@
 	<p>
 		witaj 
 		<%
-		out.print(user.getName());
+			out.print(user.getName());
 		%>
 	</p>
 	<a href="http://localhost:8080/account/changepassword">change password</a>

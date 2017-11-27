@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page = "../header.jsp" />
 	<form method="post">
 		stare haslo<input type="text" name="oldPassword" /> 
 		nowe haslo<input name="newPassword" />

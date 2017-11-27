@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page = "header.jsp" />
 	<%
 		List<Hero> heroes = (List<Hero>) request.getAttribute("heroes");
 	%>
@@ -32,7 +33,7 @@
 			</td>
 			<td>
 				<%
-					out.print(heroes.get(i).getProfession());
+					out.print(heroes.get(i).getProfession().getName());
 				%>
 			</td>
 			<td>

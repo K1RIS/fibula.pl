@@ -8,7 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<f:form method="post" modelAttribute="hero">
+	<jsp:include page = "../header.jsp" />
+	<f:form method="post" modelAttribute="hero">
 		<f:errors path="*" />
 		zmien nazwe<f:input path="name" />
 		zmien plec<f:select path="gender.id" items="${genders}" itemValue="id" itemLabel="name" />

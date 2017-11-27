@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page = "header.jsp" />
 	<a href="http://localhost:8080/account/register">register</a>	
 	<a href="http://localhost:8080/account/login">login</a>
 </body>

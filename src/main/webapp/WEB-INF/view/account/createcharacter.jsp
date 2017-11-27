@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page = "../header.jsp" />
 	<f:form method="post" modelAttribute="hero">
 		<f:errors path="*" />
 		login<f:input path="name" />

@@ -19,6 +19,10 @@ public class Hero {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private java.time.LocalDate created;
+	
+	private boolean onLine;
+	
 	@ManyToOne
 	@JoinColumn(name = "id_user")
 	private User user;
@@ -129,6 +133,22 @@ public class Hero {
 		return "Hero [id=" + id + ", name=" + name + ", gender=" + gender + ", profession=" + profession + ", level="
 				+ level + ", swordFighting=" + swordFighting + ", axeFighting=" + axeFighting + ", spellCasting="
 				+ spellCasting + "]";
+	}
+
+	public java.time.LocalDate getCreated() {
+		return created;
+	}
+
+	public void setCreated(java.time.LocalDate created) {
+		this.created = created;
+	}
+
+	public boolean isOnLine() {
+		return onLine;
+	}
+
+	public void setOnLine(boolean onLine) {
+		this.onLine = onLine;
 	}
 
 }

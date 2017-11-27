@@ -24,7 +24,7 @@ public class StatisticsController {
 
 	@RequestMapping("statistics")
 	public String stats(@RequestParam String skill, Model model) {
-		List<Hero> heroes = customHeroRepository.findTheBestIn("name");
+		List<Hero> heroes = customHeroRepository.findTheBestIn(skill);
 		model.addAttribute("heroes", heroes);	
 		return "statistics";
 	}

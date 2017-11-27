@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page = "header.jsp" />
 	<form method="get" action="character">
 		name<input type="text" name="name" /> 
 		<input type="submit" />

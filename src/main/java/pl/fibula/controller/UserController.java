@@ -32,7 +32,7 @@ public class UserController {
 			return "account/register";
 		} else {
 			userRepository.save(user);
-			ses.setAttribute("userName",user.getName());
+			ses.setAttribute("userName", user.getName());
 			return "redirect:/account";
 		}
 	}
@@ -75,7 +75,7 @@ public class UserController {
 		}
 		return "redirect:/";
 	}
-	
+
 	@RequestMapping("account/changepassword")
 	public String changePassword(Model model) {
 		return "account/changepassword";
@@ -83,8 +83,10 @@ public class UserController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "account/changepassword")
 	public String changePassword2(@RequestParam("oldPassword") String oldPassword,
-			@RequestParam("newPassword") String newPassword, @RequestParam("newPassword2") String newPassword2) {
-		User user = userRepository.findOne(1l);
+			@RequestParam("newPassword") String newPassword, @RequestParam("newPassword2") String newPassword2,
+			HttpSession ses) {
+		String userName = (String) ses.getAttribute("userName");
+		User user = userRepository.findByName(userName);
 		if (user.getPassword().equals(oldPassword)) {
 			if (newPassword.equals(newPassword2)) {
 				user.setPassword(newPassword);
@@ -101,8 +103,9 @@ public class UserController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "account/changeemail")
-	public String changeEmail2(@RequestParam("newEmail") String email) {
-		User user = userRepository.findOne(1l);
+	public String changeEmail2(@RequestParam("newEmail") String email, HttpSession ses) {
+		String userName = (String) ses.getAttribute("userName");
+		User user = userRepository.findByName(userName);
 		user.setEmail(email);
 		userRepository.save(user);
 		return "redirect:";

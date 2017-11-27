@@ -7,11 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page = "../header.jsp" />
-	<form method="post">
-		name<input type="text" name="name" /> 
-		password<input type="text" name="password" /> 
-		<input type="submit" />
-	</form>
+	<a href="http://localhost:8080/statistics/choose">highscores</a>	
+	<a href="http://localhost:8080/search">search</a>
+	<a href="http://localhost:8080/">main page</a>
 </body>
 </html>

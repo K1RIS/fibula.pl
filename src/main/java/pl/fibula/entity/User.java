@@ -1,5 +1,6 @@
 package pl.fibula.entity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,10 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	private java.time.LocalDate created = LocalDate.now();
+	
+	private java.time.LocalDate lastLogin;
 	
 	@NotBlank
 	@Column(nullable = false, unique = true)
@@ -81,6 +86,22 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", heroes="
 				+ heroes + "]";
+	}
+
+	public java.time.LocalDate getCreated() {
+		return created;
+	}
+
+	public void setCreated(java.time.LocalDate created) {
+		this.created = created;
+	}
+
+	public java.time.LocalDate getLastLogin() {
+		return lastLogin;
+	}
+
+	public void setLastLogin(java.time.LocalDate lastLogin) {
+		this.lastLogin = lastLogin;
 	}
 
 }

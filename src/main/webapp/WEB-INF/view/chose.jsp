@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page = "header.jsp" />
 	<form method="get" action="/statistics">
 		<select name = "skill">
 			<option value="level">level</option>
