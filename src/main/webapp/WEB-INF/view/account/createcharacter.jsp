@@ -13,6 +13,7 @@
 		<f:errors path="*" />
 		login<f:input path="name" />
 		<f:select path="gender.id" items="${genders}" itemValue="id" itemLabel="name" />
+		<f:select path="world.id" items="${worlds}" itemValue="id" itemLabel="name" />
 		<input type="submit" />
 	</f:form>
 </body>

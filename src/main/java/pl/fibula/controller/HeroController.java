@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import pl.fibula.entity.Gender;
 import pl.fibula.entity.Hero;
+import pl.fibula.entity.World;
 import pl.fibula.entity.User;
 import pl.fibula.repository.GenderRepository;
 import pl.fibula.repository.HeroRepository;
 import pl.fibula.repository.ProfessionRepository;
+import pl.fibula.repository.WorldRepository;
 import pl.fibula.repository.UserRepository;
 
 @Controller
@@ -37,6 +39,9 @@ public class HeroController {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private WorldRepository worldRepository;
 
 	@GetMapping("account/createcharacter")
 	public String home(Model model) {
@@ -65,6 +70,11 @@ public class HeroController {
 		return genderRepository.findAll();
 	}
 
+	@ModelAttribute("worlds")
+	public List<World> findAllWorlds() {
+		return worldRepository.findAll();
+	}
+	
 	@RequestMapping("account/character/edit/{name}")
 	String edit(@PathVariable String name, Model model) {
 		Hero hero = heroRepository.findByName(name);

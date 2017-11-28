@@ -23,21 +23,27 @@ public class Hero {
 	
 	private boolean onLine;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_user")
-	private User user;
-	
 	@NotBlank
 	@Column(nullable = false, unique = true)
 	private String name;
 	
 	@NotNull
 	@OneToOne
-	@JoinColumn(name = "gender_id")
-	private Gender gender;
-		
+	@JoinColumn(name = "id_world")
+	private World world;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_user")
+	private User user;
+	
+	@NotNull
 	@OneToOne
-	@JoinColumn(name = "profession_id")
+	@JoinColumn(name = "id_gender")
+	private Gender gender;
+	
+	//@NotNull
+	@OneToOne
+	@JoinColumn(name = "id_profession")
 	private Profession profession;
 	
 	@NotNull
@@ -151,4 +157,14 @@ public class Hero {
 		this.onLine = onLine;
 	}
 
+	public World getWorld() {
+		return world;
+	}
+
+	public void setWorld(World world) {
+		this.world = world;
+	}
+
+	
+	
 }
