@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="http://localhost:8080/statistics/choose">highscores</a>	
+	<a href="http://localhost:8080/highscores">highscores</a>	
 	<a href="http://localhost:8080/search">search</a>
 	<a href="http://localhost:8080/">main page</a>
 </body>

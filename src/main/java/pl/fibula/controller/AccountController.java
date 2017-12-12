@@ -15,19 +15,19 @@ import pl.fibula.entity.User;
 import pl.fibula.repository.UserRepository;
 
 @Controller
-public class UserController {
+public class AccountController {
 
 	@Autowired
 	private UserRepository userRepository;
 
 	@RequestMapping("account/register")
-	public String a(Model model) {
+	public String showRegisterForm(Model model) {
 		model.addAttribute("user", new User());
 		return "account/register";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "account/register")
-	public String register(@Valid User user, BindingResult bresult, HttpSession ses) {
+	public String registerAccountAndRedirect(@Valid User user, BindingResult bresult, HttpSession ses) {
 		if (bresult.hasErrors()) {
 			return "account/register";
 		} else {
@@ -38,34 +38,29 @@ public class UserController {
 	}
 
 	@RequestMapping("account/login")
-	public String xzczxc(Model model) {
+	public String showLoginForm(Model model) {
 		return "account/login";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "account/login")
-	public String xcz(@RequestParam String name, @RequestParam String password, HttpSession ses) {
+	public String loginAndRedirect(@RequestParam String name, @RequestParam String password, HttpSession ses) {
 		User user = userRepository.findByName(name);
-		if (user != null) {
-			if (user.getPassword().equals(password)) {
-				ses.setAttribute("userName", user.getName());
-				return "redirect:";
-			} else {
-				return "redirect:login";
-			}
+		if (user != null && user.getPassword().equals(password)) {
+			ses.setAttribute("userName", user.getName());
+			return "redirect:";
 		}
 		return "redirect:login";
 	}
 
 	@RequestMapping("account")
-	public String homepage(Model model, HttpSession ses) {
+	public String accountManagment(Model model, HttpSession ses) {
 		if (ses.getAttribute("userName") != null) {
 			String userName = (String) ses.getAttribute("userName");
 			User user = userRepository.findByName(userName);
 			model.addAttribute("user", user);
 			return "account/managment";
-		} else {
-			return "redirect:account/login";
 		}
+		return "redirect:account/login";
 	}
 
 	@RequestMapping("account/logout")
@@ -77,12 +72,12 @@ public class UserController {
 	}
 
 	@RequestMapping("account/changepassword")
-	public String changePassword(Model model) {
+	public String showChangePasswordForm(Model model) {
 		return "account/changepassword";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "account/changepassword")
-	public String changePassword2(@RequestParam("oldPassword") String oldPassword,
+	public String changePasswordAndRedirect(@RequestParam("oldPassword") String oldPassword,
 			@RequestParam("newPassword") String newPassword, @RequestParam("newPassword2") String newPassword2,
 			HttpSession ses) {
 		String userName = (String) ses.getAttribute("userName");
@@ -98,12 +93,12 @@ public class UserController {
 	}
 
 	@RequestMapping("account/changeemail")
-	public String changeEmail(Model model) {
+	public String showChangeEmailForm(Model model) {
 		return "account/changeemail";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "account/changeemail")
-	public String changeEmail2(@RequestParam("newEmail") String email, HttpSession ses) {
+	public String changeEmailAndRedirect(@RequestParam("newEmail") String email, HttpSession ses) {
 		String userName = (String) ses.getAttribute("userName");
 		User user = userRepository.findByName(userName);
 		user.setEmail(email);

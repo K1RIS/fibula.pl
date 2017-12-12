@@ -39,20 +39,20 @@ public class HeroController {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private WorldRepository worldRepository;
 
 	@GetMapping("account/createcharacter")
-	public String home(Model model) {
+	public String showCreatingCharacterForm(Model model) {
 		model.addAttribute("hero", new Hero());
-		return "account/createcharacter";
+		return "account/hero/create";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "account/createcharacter")
-	public String create(@Valid Hero hero, BindingResult bresult, HttpSession ses) {
+	public String createCharacterAndRedirect(@Valid Hero hero, BindingResult bresult, HttpSession ses) {
 		if (bresult.hasErrors()) {
-			return "account/createcharacter";
+			return "account/hero/create";
 		} else if (ses.getAttribute("userName") != null) {
 			String userName = (String) ses.getAttribute("userName");
 			User user = userRepository.findByName(userName);
@@ -60,7 +60,7 @@ public class HeroController {
 			hero.setProfession(professionRepository.findOne(1l));
 			heroRepository.save(hero);
 			return "redirect:/account";
-		}else {
+		} else {
 			return "redirect:login";
 		}
 	}
@@ -74,16 +74,16 @@ public class HeroController {
 	public List<World> findAllWorlds() {
 		return worldRepository.findAll();
 	}
-	
+
 	@RequestMapping("account/character/edit/{name}")
-	String edit(@PathVariable String name, Model model) {
+	String showEditForm(@PathVariable String name, Model model) {
 		Hero hero = heroRepository.findByName(name);
 		model.addAttribute(hero);
-		return "account/edit";
+		return "account/hero/edit";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "account/character/edit/{name}")
-	public String edit2(@Valid Hero hero) {
+	public String editAndRedirectToAccountManagment(@Valid Hero hero) {
 		heroRepository.save(hero);
 		return "redirect:/account";
 	}

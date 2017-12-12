@@ -16,6 +16,7 @@
 		<f:hidden path="id"/>
 		<f:hidden path="user.id"/>
 		<f:hidden path="profession.id"/>
+		<f:hidden path="world.id"/>
 		<input type="submit" />
 	</f:form>
 </body>

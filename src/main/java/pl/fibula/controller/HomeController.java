@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
 	@RequestMapping("/")
-	public String home(Model model, HttpSession ses) {
+	public String showMainPage(Model model, HttpSession ses) {
 		if (ses.getAttribute("userName") != null) {
 			return "redirect:account";
 		}

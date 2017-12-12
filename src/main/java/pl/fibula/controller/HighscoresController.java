@@ -12,21 +12,19 @@ import pl.fibula.dao.CustomHeroRepository;
 import pl.fibula.entity.Hero;
 
 @Controller
-public class StatisticsController {
+public class HighscoresController {
 
 	@Autowired
 	private CustomHeroRepository customHeroRepository;
 
-	@RequestMapping("statistics/choose")
-	public String home(Model model) {
-		return "chose";
-	}
-
-	@RequestMapping("statistics")
-	public String stats(@RequestParam String skill, Model model) {
-		List<Hero> heroes = customHeroRepository.findTheBestIn(skill);
-		model.addAttribute("heroes", heroes);	
-		return "statistics";
+	@RequestMapping("highscores")
+	public String showHighscoresOrForm(@RequestParam(value = "skill", required = false)String skill, Model model) {
+		if (skill != null) {
+			List<Hero> heroes = customHeroRepository.findTheBestIn(skill);
+			model.addAttribute("heroes", heroes);
+			return "highscores/highscores";
+		}
+		return "highscores/form";
 	}
 
 }

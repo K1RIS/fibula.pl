@@ -16,17 +16,17 @@ public class SearchController {
 	private HeroRepository heroRepository;
 
 	@RequestMapping("search")
-	public String home() {
-		return "search";
+	public String showSearchFrom() {
+		return "search/search";
 	}
 
 	@RequestMapping("character")
-	String search(@RequestParam String name, Model model) {
+	String redirectToCharacter(@RequestParam String name, Model model) {
 		Hero hero = heroRepository.findByName(name);
 		if(hero == null) {
 			return "redirect:search";
 		}
 		model.addAttribute(hero);
-		return "character";
+		return "search/hero";
 	}
 }
