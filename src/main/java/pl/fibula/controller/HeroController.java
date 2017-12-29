@@ -43,13 +43,13 @@ public class HeroController {
 	@Autowired
 	private WorldRepository worldRepository;
 
-	@GetMapping("account/createcharacter")
+	@GetMapping("account/character/create")
 	public String showCreatingCharacterForm(Model model) {
 		model.addAttribute("hero", new Hero());
 		return "account/hero/create";
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "account/createcharacter")
+	@RequestMapping(method = RequestMethod.POST, value = "account/character/create")
 	public String createCharacterAndRedirect(@Valid Hero hero, BindingResult bresult, HttpSession ses) {
 		if (bresult.hasErrors()) {
 			return "account/hero/create";

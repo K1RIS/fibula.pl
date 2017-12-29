@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.fibula.entity.User;
 import pl.fibula.repository.UserRepository;
@@ -106,4 +107,24 @@ public class AccountController {
 		return "redirect:";
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "userNameValidate", method = RequestMethod.POST)
+	public String userNameValidate(Model model, String variable) {
+		if (userRepository.findByName(variable) == null) {
+			return "dobrze";
+		} else {
+			return "name already used";
+		}
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "emailValidate", method = RequestMethod.POST)
+	public String emailValidate(Model model, String variable) {
+		if (userRepository.findByEmail(variable) == null) {
+			return "dobrze";
+		} else {
+			return "email already used";
+		}
+	}
+	
 }
