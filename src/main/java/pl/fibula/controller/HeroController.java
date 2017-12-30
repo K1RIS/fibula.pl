@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.fibula.entity.Gender;
 import pl.fibula.entity.Hero;
@@ -94,4 +95,16 @@ public class HeroController {
 		return "redirect:/account";
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "heroValidate", method = RequestMethod.POST)
+	public String heroNameValidate(Model model, String variable) {
+		if(variable.length() < 8 || variable.length() > 15) {
+			return "The character name must have at least 8 and less than 15 letters!";
+		} else if (heroRepository.findByName(variable) == null) {
+			return "name already used";
+		} else {
+			return "dobrze";
+		} 
+	}
+	
 }

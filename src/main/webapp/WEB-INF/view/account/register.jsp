@@ -7,8 +7,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Insert title here</title>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script src="/registervalidate.js"></script>
-
+  <script src="/javascripts/registervalidate.js"></script>
 </head>
 <body>
 	<jsp:include page = "../header.jsp" />
@@ -23,7 +22,7 @@
 		<div id="email">
 	  		<label>email<f:input path="email"/></label>
 	    </div>
-		<input type="submit" />
+		<input type="submit" disabled/>
 	</f:form>
 </body>
 </html>
