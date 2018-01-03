@@ -97,13 +97,11 @@ public class HeroController {
 
 	@ResponseBody
 	@RequestMapping(value = "heroValidate", method = RequestMethod.POST)
-	public String heroNameValidate(Model model, String variable) {
-		if(variable.length() < 8 || variable.length() > 15) {
-			return "The character name must have at least 8 and less than 15 letters!";
-		} else if (heroRepository.findByName(variable) == null) {
-			return "name already used";
+	public String checkIfHeroAlreadyExist(Model model, String variable) {
+		if (heroRepository.findByName(variable) != null) {
+			return "false";
 		} else {
-			return "dobrze";
+			return "true";
 		} 
 	}
 	

@@ -109,21 +109,21 @@ public class AccountController {
 
 	@ResponseBody
 	@RequestMapping(value = "userNameValidate", method = RequestMethod.POST)
-	public String userNameValidate(Model model, String variable) {
+	public String checkIfUserAlreadyExist(Model model, String variable) {
 		if (userRepository.findByName(variable) == null) {
-			return "dobrze";
+			return "false";
 		} else {
-			return "name already used";
+			return "true";
 		}
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "emailValidate", method = RequestMethod.POST)
-	public String emailValidate(Model model, String variable) {
+	public String checkIfEmailAlreadyUsed(Model model, String variable) {
 		if (userRepository.findByEmail(variable) == null) {
-			return "dobrze";
+			return "false";
 		} else {
-			return "email already used";
+			return "true";
 		}
 	}
 	

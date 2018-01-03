@@ -10,8 +10,11 @@ function onReady() {
 	var $paragraph = $("<p>");
 
 	var confirmButton = document.querySelector('[type=submit]');
-		
-	textInput.onkeyup = function(){ 
+			
+	textInput.addEventListener("keyup", validate);	
+	textInput.addEventListener("focusout", validate);
+	
+	function validate(){
 		var timeout = null;
 		clearTimeout(timeout);
 		timeout = setTimeout(function() {
@@ -20,12 +23,12 @@ function onReady() {
 				variable : textInput.value
 			}, function(text) {			
 				$paragraph.text(text);
-				if($paragraph.text() == "dobrze" ){
+				if($paragraph.text() == "OK" ){
 					confirmButton.disabled = false;
 				}else{
 					confirmButton.disabled = true;
 				}
 			})
-		}, 500);	
+		}, 500);
 	}
 }

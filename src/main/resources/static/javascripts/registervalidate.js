@@ -15,29 +15,60 @@ function onReady() {
 
 	var confirmButton = document.querySelector('[type=submit]');
 		
-	loginTextInput.onkeyup = function(){ 
-		validate('/userNameValidate', loginTextInput, $loginParagraph, loginDiv)
+	loginTextInput.addEventListener("keyup", validateLogin);	
+	loginTextInput.addEventListener("focusout", validateLogin);
+	
+	emailTextInput.addEventListener("keyup", validateEmail);	
+	emailTextInput.addEventListener("focusout", validateEmail);
+	
+	var lastInput;
+	
+	var timeout = null;
+	
+	var loginRE = /^[a-zA-Z0-9]*$/;
+	var emailRE = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	
+	function validateLogin(){
+		$(loginDiv).append($loginParagraph);
+		if(!loginRE.test(loginTextInput.value)){
+			changeParagraphText($loginParagraph, "Your account name may only consist of numbers 0-9 and letters A-Z!")
+		}else if(loginTextInput.value.length < 5 || loginTextInput.value.length > 15){
+			changeParagraphText($loginParagraph, "Login must have at least 5 and less than 15 letters!");
+		}else if(loginTextInput.value != lastInput){
+			lastInput = loginTextInput.value;
+			clearTimeout(timeout);
+			timeout = setTimeout(function() {
+				checkIfAlreadyUsed('/userNameValidate', loginTextInput, $loginParagraph, "Login already taken");
+			}, 500);
+		}
 	}
 	
-	emailTextInput.onkeyup = function(){
-		validate('/emailValidate', emailTextInput, $emailParagraph, emailDiv) 
-	}
 	
-	function validate(path, textInput, $paragraph, div){
-		var timeout = null;
-		clearTimeout(timeout);
-		timeout = setTimeout(function() {
-			$(div).append($paragraph);
-			$.post(path, {
-				variable : textInput.value
-			}, function(text) {			
-				$paragraph.text(text);
-				if($loginParagraph.text() == "dobrze" && $emailParagraph.text() == "dobrze"){
-					confirmButton.disabled = false;
-				}else{
-					confirmButton.disabled = true;
-				}
-			})
-		}, 500);	
+	function validateEmail(){			
+		$(emailDiv).append($emailParagraph);
+		if(!emailRE.test(emailTextInput.value)){
+			changeParagraphText($emailParagraph, "This email address has an invalid format.")
+		}else if(emailTextInput.value != lastInput){	
+			lastInput = emailTextInput.value;
+			clearTimeout(timeout);
+			timeout = setTimeout(function() {
+				checkIfAlreadyUsed('/emailValidate', emailTextInput, $emailParagraph, "Email already used.")
+			}, 500);					
+		}	
+	}
+		
+	function changeParagraphText(paragraph, text){
+		paragraph.text(text);
+	}
+		
+	function checkIfAlreadyUsed(path, textInput, paragraph, text){
+		$.post(path, {variable : textInput.value})		
+		.done(function(data) {			
+			if(data == "true"){
+				changeParagraphText(paragraph, text);
+			}else{
+				changeParagraphText(paragraph, "OK")
+			}	
+		})
 	}
 }
