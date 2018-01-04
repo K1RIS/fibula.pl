@@ -9,14 +9,14 @@ JavaScript (JQuery/vanilla). <br />
 <br />
 Current features: <br />
 -register an account <br />
--change email assigned to the accoun t <br />
+-change email assigned to the account <br />
 -change password <br />
 -create a character <br />
 -delete character <br />
 -edit character's name or gender <br />
 -check the best players sorted by the chosen skill <br />
 -find a character by name and check his statistics <br />
-
+<br />
 Things to do: <br />
 -forum <br />
 -better look <br />
