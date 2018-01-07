@@ -98,7 +98,7 @@ public class HeroController {
 	@ResponseBody
 	@RequestMapping(value = "heroValidate", method = RequestMethod.POST)
 	public String checkIfHeroAlreadyExist(Model model, String variable) {
-		if (heroRepository.findByName(variable) != null) {
+		if (heroRepository.findByName(variable) == null) {
 			return "false";
 		} else {
 			return "true";

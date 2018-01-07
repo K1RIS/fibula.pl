@@ -21,13 +21,13 @@ function onReady() {
 	emailTextInput.addEventListener("keyup", validateEmail);	
 	emailTextInput.addEventListener("focusout", validateEmail);
 	
-	var lastInput;
-	
-	var timeout = null;
-	
 	var loginRE = /^[a-zA-Z0-9]*$/;
 	var emailRE = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	
+	var lastInput;
+	
+	var timeout = null;
+		
 	function validateLogin(){
 		$(loginDiv).append($loginParagraph);
 		if(!loginRE.test(loginTextInput.value)){
