@@ -22,7 +22,7 @@
 		<div id="email">
 	  		<label>email<f:input path="email"/></label>
 	    </div>
-		<input type="submit" disabled/>
+		<input type="submit" />
 	</f:form>
 </body>
 </html>
